@@ -6,6 +6,7 @@
   width: 100%;
   margin: 0;
   padding: 0;
+  background-color: aliceblue;
   border-bottom: 5px inset darkblue;
 }
 
@@ -48,8 +49,12 @@
   border: 5px solid #050385;
   border-radius: 25px;
   cursor: pointer;
-
   margin-bottom: 15px;
+  transition: transform 0.1s ease;
+}
+
+.header__button:active {
+  transform: scale(0.95);
 }
 
 @keyframes spin {
