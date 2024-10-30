@@ -881,7 +881,94 @@
   }
 }
 
-@media (max-width: 752px) /* and (orientation: portrait) */ {
+@media (max-width: 760px) {
+  .pokedex {
+    width: 300px;
+  }
+
+  .pokedex__left-side {
+    width: 300px;
+    height: 500px;
+    float: left;
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+  }
+  .pokedex__screen {
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
+  .pokedex__curve1_left {
+    width: 201px;
+    height: 85px;
+    background-color: #8b0000;
+    float: left;
+    padding: 15px 0 0 15px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    box-shadow: 0 0 #5e0000;
+    -webkit-box-shadow: 0 0 #5e0000;
+    -moz-box-shadow: 0 0 #5e0000;
+    -o-box-shadow: 0 0 #5e0000;
+
+    border-bottom-right-radius: 85px 60px;
+    -webkit-border-bottom-right-radius: 85px 60px;
+    -moz-border-bottom-right-radius: 85px 60px;
+    -o-border-bottom-right-radius: 85px 60px;
+
+    border-top-left-radius: 30px;
+    -webkit-border-top-left-radius: 30px;
+    -moz-border-top-left-radius: 30px;
+    -o-border-top-left-radius: 30px;
+  }
+  .pokedex__bg_curve2_left {
+    width: 300px;
+  }
+  .pokedex__bg-curve1_left {
+    width: 300px;
+    height: 80px;
+    background-color: #8b0000;
+
+    box-shadow: -10px 9px #5e0000;
+    -webkit-box-shadow: -10px 9px #5e0000;
+    -moz-box-shadow: -10px 9px #5e0000;
+    -o-box-shadow: -10px 9px #5e0000;
+
+    border-top-left-radius: 30px;
+    -webkit-border-top-left-radius: 30px;
+    -moz-border-top-left-radius: 30px;
+    -o-border-top-left-radius: 30px;
+  }
+  .pokedex__buttonbottom-picture {
+    margin-left: 40px;
+  }
+
+  .pokedex__logo {
+    width: 281px;
+    height: 99px;
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/200653/logo.png')
+      no-repeat left top;
+    z-index: 1;
+
+    position: absolute;
+    top: 370px;
+    left: 5px;
+  }
+
+  .pokedex__right-side,
+  .pokedex__big-bluebutton,
+  .pokedex__barbutton_left,
+  .pokedex__barbutton_right,
+  .pokedex__cross {
+    display: none;
+  }
+}
+
+/* @media (max-width: 752px)  and (orientation: portrait)  {
   .pokedex {
     width: 400px;
   }
@@ -959,3 +1046,4 @@
     display: none;
   }
 }
+ */
