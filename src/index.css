@@ -4,4 +4,6 @@
 @import './blocks/pokedex.css';
 @import './blocks/footer.css';
 @import './blocks/about.css';
+@import './blocks/loading.css';
+@import './blocks/popup.css';
 @import './vendor/fonts/fonts.css';
