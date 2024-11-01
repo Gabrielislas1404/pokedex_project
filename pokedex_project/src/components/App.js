@@ -1,12 +1,10 @@
-import React from 'react';
-import '../index.css';
-import Header from './Header';
-import Main from './Main';
-import Footer from './Footer';
-import About from './About';
-import Loading from './Loading';
-import PopupNotification from './PopupNotification';
-import { Switch, Route } from 'react-router-dom';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import "../index.css";
+import About from "./About";
+import Footer from "./Footer";
+import Header from "./Header";
+import Main from "./Main";
 
 function App() {
   return (
@@ -16,8 +14,6 @@ function App() {
           <Header />
           <Main />
           <Footer />
-          <Loading />
-          <PopupNotification />
         </Route>
         <Route path="/About">
           <About />

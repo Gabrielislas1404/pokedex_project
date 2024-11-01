@@ -8,3 +8,14 @@ export const getPokemonByName = async (name) => {
     throw new Error("Error Pokémon no encontrado");
   }
 };
+
+export const getPokemonById = async (id) => {
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    const pokemon = await response.json();
+    return pokemon;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error Pokémon no encontrado");
+  }
+};
