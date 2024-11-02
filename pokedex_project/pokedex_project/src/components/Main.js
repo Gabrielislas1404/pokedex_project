@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getPokemonById, getPokemonByName } from "../utils/pokemons";
 import Loading from "./Loading";
 import PopupNotification from "./PopupNotification";
@@ -6,26 +6,23 @@ import PopupNotification from "./PopupNotification";
 function Main() {
   const [namePokemon, setNamePokemon] = useState("");
   const [pokemon, setPokemon] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [firtRun, setFirtRun] = useState(true);
 
   const handleGetPokemon = async () => {
-    setPokemon(null);
-    setLoading(true);
     try {
       if (!namePokemon) {
-        setError(true);
-        setLoading(false);
-        return;
+        return setError(true);
       }
 
+      setLoading(true);
       const response = await getPokemonByName(namePokemon.toLowerCase());
       setPokemon(response);
       setLoading(false);
     } catch (error) {
+      setNamePokemon("");
       setError(true);
-      setLoading(false);
+      console.log(error.message);
     }
   };
 
@@ -43,7 +40,6 @@ function Main() {
     } catch (error) {
       setError(true);
       setNamePokemon("");
-      setLoading(false);
       console.log(error.message);
     }
   };
@@ -52,29 +48,13 @@ function Main() {
     return (
       pokemon?.sprites?.other?.showdown?.front_default ||
       pokemon?.sprites?.other?.dream_world?.front_default ||
-      pokemon?.sprites?.other?.home?.front_default ||
-      "https://i.pinimg.com/236x/bb/65/ac/bb65acb8eced7c4a1fbce90916211e80.jpg"
+      pokemon?.sprites?.other?.home?.front_default
     );
   };
 
   const handleHiddenPopup = () => {
     setError(false);
   };
-
-  useEffect(() => {
-    if (firtRun) {
-      setFirtRun(false);
-      return;
-    }
-
-    const handler = setTimeout(() => {
-      handleGetPokemon(namePokemon);
-    }, 1000);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [namePokemon]);
 
   return (
     <section className="pokedex">
@@ -83,9 +63,7 @@ function Main() {
         <div className="pokedex__search pokedex__search_left">
           <input
             value={namePokemon}
-            onChange={(e) => {
-              setNamePokemon(e.target.value);
-            }}
+            onChange={(e) => setNamePokemon(e.target.value)}
             type="text"
             placeholder="Buscar Pokémon..."
             className="pokedex_search-input"
@@ -129,7 +107,6 @@ function Main() {
                 src={returnPokemonImage()}
                 alt="psykokwak"
                 height="170"
-                width={230}
               />
             )}
           </div>
@@ -151,8 +128,11 @@ function Main() {
           <div className="pokedex__topcross" onClick={handleGetPokemonById}>
             <div className="pokedex__upT"></div>
           </div>
-          <div className="pokedex__rightcross" onClick={handleGetPokemonById}>
-            <div className="pokedex__rightT"></div>
+          <div className="pokedex__rightcross">
+            <div
+              className="pokedex__rightT"
+              onClick={handleGetPokemonById}
+            ></div>
           </div>
           <div className="pokedex__midcross">
             <div className="pokedex__midCircle"></div>
@@ -177,16 +157,14 @@ function Main() {
         </div>
 
         <div className="pokedex__stats">
-          <strong>Name:</strong> {pokemon ? pokemon?.name : "---------------"}
+          <strong>Name:</strong> {pokemon ? pokemon?.name : "No Pokemon"}
           <br />
           <strong>Type:</strong>{" "}
-          {pokemon ? `${pokemon?.types?.[0]?.type?.name}` : "---------------"}
+          {pokemon ? `${pokemon?.types?.[0]?.type?.name}` : "No pokemon"}
           <br />
-          <strong>Height:</strong>{" "}
-          {pokemon ? pokemon?.height : "---------------"}
+          <strong>Height:</strong> {pokemon ? pokemon?.height : "No pokemon"}
           <br />
-          <strong>Weight:</strong>{" "}
-          {pokemon ? pokemon?.weight : "---------------"}
+          <strong>Weight:</strong> {pokemon ? pokemon?.weight : "No pokemon"}
           <br />
           <br />
           <strong>habilites</strong>
@@ -196,7 +174,7 @@ function Main() {
               ? pokemon?.abilities?.map((ability) => (
                   <div key={ability.ability.name}>{ability.ability.name}</div>
                 ))
-              : "---------------"}
+              : "No pokemon"}
             {}
           </div>
         </div>
