@@ -12,7 +12,7 @@ function Modal({ active, closeModal }) {
       <div className="modal__info">
         <p>
           Para tener la experiencia completa del pókedex te recomendamos una
-          pantalla mayor a 760px. Mientras tanto puedes buscar la imagen de tu
+          pantalla mayor a 760px. Mientras tanto puedes buscar la imágen de tu
           Pokémon favorito
         </p>
       </div>
