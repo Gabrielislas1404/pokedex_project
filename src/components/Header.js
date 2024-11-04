@@ -1,10 +1,10 @@
-import headerLogo from '../images/pokedex-logo.png';
-import pokeballImage from '../images/pokeball-image.png';
-import { withRouter } from 'react-router-dom';
+import headerLogo from "../images/pokedex-logo.png";
+import pokeballImage from "../images/pokeball-image.png";
+import { withRouter } from "react-router-dom";
 
 function Header({ history }) {
   const handleClick = () => {
-    history.push('/about'); // Navegar a la ruta /about
+    history.push("/about"); // Navegar a la ruta /about
   };
   return (
     <header className="header">

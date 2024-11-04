@@ -1,0 +1,41 @@
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 2;
+  flex-direction: column;
+}
+
+.modal__info {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  max-width: 400px;
+  color: white;
+  border: 1px solid red;
+}
+
+.modal__hidden {
+  display: none;
+}
+
+.modal__close-button {
+  background: url(../images/close-button.png) no-repeat center;
+  background-size: contain;
+  border: none;
+  width: 35px;
+  height: 35px;
+  position: static;
+  right: 350px;
+  top: 200px;
+  cursor: pointer;
+}

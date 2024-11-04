@@ -1,16 +1,22 @@
 .loading__wrapper {
-  position: static;
-  transform: translate(-203px, -420px);
+  position: absolute;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(50%, 50%);
   z-index: 1;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  height: 0;
-  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .loading__text {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 15px;
   margin-top: 10px;
 }
@@ -30,7 +36,7 @@
 }
 
 .loading__pokeball:after {
-  content: '';
+  content: "";
   position: absolute;
   width: 60px;
   height: 30px;
@@ -40,7 +46,7 @@
 }
 
 .loading__pokeball:before {
-  content: '';
+  content: "";
   position: absolute;
   background-color: #fff;
   width: 10px;
@@ -58,11 +64,5 @@
   }
   100% {
     transform: rotate(360deg);
-  }
-}
-
-@media screen and (max-width: 760px) {
-  .loading__wrapper {
-    transform: translate(7px, -420px);
   }
 }

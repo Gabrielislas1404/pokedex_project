@@ -6,4 +6,5 @@
 @import './blocks/about.css';
 @import './blocks/loading.css';
 @import './blocks/popup.css';
+@import './blocks/modal.css';
 @import './vendor/fonts/fonts.css';
