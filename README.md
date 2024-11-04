@@ -7,9 +7,11 @@ Este proyecto ha sido creado con [Create React App](https://github.com/facebook/
 ## Descargar el proyecto
 
 Este proyecto es público. Puedes utilizar git clone <URL-del-repositorio>
-Una vez descargado aplica ### npm install y finalmente ### npm start
+Una vez descargado aplica:
 
-Corre la app en development mode.\
+### npm install y finalmente npm start
+
+Corre la app en development mode.
 Abre [http://localhost:3000] para ver en tu navegador.
 
 ## Acerca del proyecto.
