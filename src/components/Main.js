@@ -1,11 +1,16 @@
-import { useEffect, useState } from 'react';
-import { getPokemonById, getPokemonByName } from '../utils/pokemons';
-import Loading from './Loading';
-import Modal from './Modal';
-import PopupNotification from './PopupNotification';
+import { useEffect, useState } from "react";
+import { getPokemonById, getPokemonByName } from "../utils/pokemons";
+import Loading from "./Loading";
+import Modal from "./Modal";
+import PopupNotification from "./PopupNotification";
+import InputSearch from "./inputSearcch";
+import ButtonGlass from "./ButtonGlass";
+import PokedexDisplay from "./PokedexDisplay";
+import DirectionButtons from "./DirectionButtons";
+import PokedexStats from "./PokedexStats";
 
 function Main() {
-  const [namePokemon, setNamePokemon] = useState('');
+  const [namePokemon, setNamePokemon] = useState("");
   const [pokemon, setPokemon] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -13,7 +18,7 @@ function Main() {
   const [showAlert, setShowAlert] = useState(false);
   const [firstOpenModal, setFirstOpenModal] = useState(false);
 
-  const audio = new Audio('/audio.mp3');
+  const audio = new Audio("/audio.mp3");
 
   const handleGetPokemon = async () => {
     try {
@@ -51,7 +56,7 @@ function Main() {
     } catch (error) {
       setTimeout(() => {
         setError(true);
-        setNamePokemon('');
+        setNamePokemon("");
         setLoading(false);
       }, 2000);
       console.log(error.message);
@@ -63,7 +68,7 @@ function Main() {
       pokemon?.sprites?.other?.showdown?.front_default ||
       pokemon?.sprites?.other?.dream_world?.front_default ||
       pokemon?.sprites?.other?.home?.front_default ||
-      'https://i.pinimg.com/236x/bb/65/ac/bb65acb8eced7c4a1fbce90916211e80.jpg'
+      "https://i.pinimg.com/236x/bb/65/ac/bb65acb8eced7c4a1fbce90916211e80.jpg"
     );
   };
 
@@ -101,15 +106,19 @@ function Main() {
 
     updateSize();
 
-    window.addEventListener('resize', updateSize);
+    window.addEventListener("resize", updateSize);
 
     return () => {
-      window.removeEventListener('resize', updateSize);
+      window.removeEventListener("resize", updateSize);
     };
   }, [firstOpenModal]);
 
   const handleCloseModal = () => {
     setShowAlert(false);
+  };
+
+  const onChangeValue = (value) => {
+    setNamePokemon(value);
   };
 
   return (
@@ -119,14 +128,9 @@ function Main() {
         {error && <PopupNotification show={error} hidden={handleHiddenPopup} />}
         <div className="pokedex__left-side">
           <div className="pokedex__search pokedex__search_left">
-            <input
-              value={namePokemon}
-              onChange={(e) => {
-                setNamePokemon(e.target.value);
-              }}
-              type="text"
-              placeholder="Buscar Pokémon..."
-              className="pokedex_search-input"
+            <InputSearch
+              namePokemon={namePokemon}
+              onChangeValue={onChangeValue}
             />
           </div>
 
@@ -134,9 +138,7 @@ function Main() {
           <div className="pokedex__bg-curve1_left"></div>
           <div className="pokedex__bg_curve2_left"></div>
           <div className="pokedex__curve1_left">
-            <div className="pokedex__buttonGlass">
-              <div className="pokedex__reflect"> </div>
-            </div>
+            <ButtonGlass />
             <div className="pokedex__miniButtonGlass_red"></div>
             <div className="pokedex__miniButtonGlass_yellow"></div>
             <div className="pokedex__miniButtonGlass_green"></div>
@@ -147,88 +149,21 @@ function Main() {
               <div className="pokedex__junction_down"></div>
             </div>
           </div>
-          <div className="pokedex__screen">
-            <div className="pokedex__top-picture">
-              <div className="pokedex__buttontop-picture_right"></div>
-              <div className="pokedex__buttontop-picture_left"></div>
-            </div>
-            <div className="pokedex__picture">
-              {loading ? (
-                <Loading />
-              ) : (
-                <img
-                  className="pokedex__picture-img"
-                  src={returnPokemonImage()}
-                  alt="pokemon"
-                  height="170"
-                  /* width={230} */
-                />
-              )}
-            </div>
-            <div className="pokedex__buttonbottom-picture"></div>
-            <div className="pokedex__speakers">
-              <div className="pokedex__sp"></div>
-              <div className="pokedex__sp"></div>
-              <div className="pokedex__sp"></div>
-              <div className="pokedex__sp"></div>
-            </div>
-          </div>
+          <PokedexDisplay loading={loading} pokemon={pokemon} />
           <div className="pokedex__big-bluebutton"></div>
           <div className="pokedex__barbutton_left"></div>
           <div className="pokedex__barbutton_right"></div>
-          <div className="pokedex__cross">
-            <div className="pokedex__leftcross" onClick={handleGetPokemonById}>
-              <div className="pokedex__leftT"></div>
-            </div>
-            <div className="pokedex__topcross" onClick={handleGetPokemonById}>
-              <div className="pokedex__upT"></div>
-            </div>
-            <div className="pokedex__rightcross" onClick={handleGetPokemonById}>
-              <div className="pokedex__rightT"></div>
-            </div>
-            <div className="pokedex__midcross">
-              <div className="pokedex__midCircle"></div>
-            </div>
-            <div className="pokedex__botcross" onClick={handleGetPokemonById}>
-              <div className="pokedex__downT"></div>
-            </div>
-          </div>
+          <DirectionButtons handleGetPokemonById={handleGetPokemonById} />
         </div>
+
         <div className="pokedex__right-side">
           <div className="pokedex__search">
-            <input
-              value={namePokemon}
-              onChange={(e) => setNamePokemon(e.target.value)}
-              type="text"
-              placeholder="Buscar Pokémon..."
-              className="pokedex_search-input"
+            <InputSearch
+              namePokemon={namePokemon}
+              onChangeValue={onChangeValue}
             />
           </div>
-
-          <div className="pokedex__stats">
-            <strong>Name:</strong> {pokemon ? pokemon?.name : '---------------'}
-            <br />
-            <strong>Type:</strong>{' '}
-            {pokemon ? `${pokemon?.types?.[0]?.type?.name}` : '---------------'}
-            <br />
-            <strong>Height:</strong>{' '}
-            {pokemon ? pokemon?.height : '---------------'}
-            <br />
-            <strong>Weight:</strong>{' '}
-            {pokemon ? pokemon?.weight : '---------------'}
-            <br />
-            <br />
-            <strong>Habilites:</strong>
-            <br />
-            <div className="pokemon_stats_habilites">
-              {pokemon
-                ? pokemon?.abilities?.map((ability) => (
-                    <div key={ability.ability.name}>{ability.ability.name}</div>
-                  ))
-                : '---------------'}
-              {}
-            </div>
-          </div>
+          <PokedexStats pokemon={pokemon} />
           <div className="pokedex__blueButtons_up">
             <div className="pokedex__blueButton"></div>
             <div className="pokedex__blueButton"></div>
